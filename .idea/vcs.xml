@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../flow1/uge2-network/NetworkDemo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../../flow2/uge5-jbdc/dat2-sportsclub" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../uge8-lifehack/lifehack_spring_2024" vcs="Git" />
+  </component>
+</project>
