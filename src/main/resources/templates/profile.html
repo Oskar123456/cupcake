@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>Profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" th:href="@{/images/cupcakefavico32x32.png}">
+<link rel="icon" type="image/png" sizes="48x48" th:href="@{/images/cupcakefavico48x48.png}">
+</head>
+
+<body>
+
+<div class="page">
+    <header>
+        <a href="index.html" th:href="@{/}">
+            <img src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogotitle.png}" alt="" />
+            <img alt="logo" src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogocakes.png}"/>
+        </a>
+    </header>
+
+<div>
+  <h1 th:text="${requser.Email()}"></h1>
+</div>
+
+
+</div>
+</body>
+</html>

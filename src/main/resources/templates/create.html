@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>Create</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" th:href="@{/images/cupcakefavico32x32.png}">
+<link rel="icon" type="image/png" sizes="48x48" th:href="@{/images/cupcakefavico48x48.png}">
+</head>
+
+<body>
+
+<div class="page">
+    <header>
+        <a href="index.html" th:href="@{/}">
+            <img src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogotitle.png}" alt="" />
+            <img alt="logo" src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogocakes.png}"/>
+        </a>
+    </header>
+
+    <div class="inputDiv">
+        <form method="post">
+          <input type="email" id="email" name="email" value="" placeholder="indtast din email" />
+          <input type="password" id="pwd" name="pwd" value="" placeholder="indtast dit kodeord" />
+          <input type="password" id="pwd" name="pwd" value="" placeholder="indtast dit kodeord igen" />
+          <button formaction="createuser" type="submit">Bekræft</button>
+          </form>
+    </div>
+
+</div>
+</body>
+</html>

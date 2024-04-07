@@ -21,16 +21,20 @@
 
     <div class="navbar">
         <div class="navbarLeft">
-            <p>lol</p>
-            <p>looool</p>
+            <a th:if="${session.admin == true}" th:href="customers">Kunder</a>
+            <a th:if="${session.admin == true}" th:href="allorders">Ordrer</a>
         </div>
         <div class="navbarRight">
-            <p>lol</p>
-            <p>looool</p>
+            <a th:if="${session.user == null}" href="../templates/login.html"
+               th:href="login">log ind</a>
+            <a th:if="${session.user != null}" href="../templates/profile.html"
+               th:href="@{profile(email=${session.user.Email()})}"
+               th:text="${session.user.Email()}"></a>
+            <a href="../templates/myorders.html" th:href="myorders">kurv</a>
         </div>
     </div>
 
-    <div class="frontpageBoxOrder">
+    <div class="inputDiv">
         <h1>Velkommen</h1>
         <h2>Info her</h2>
         <form method="post">
@@ -54,6 +58,11 @@
             <button formaction="/order" type="submit">Vælg</button>
         </form>
     </div>
+
+    <div class="frontpagestatus" th:if="${message != null && !message.isEmpty()}" >
+        <p th:text="${message}" ></p>
+    </div>
+
 </div>
 </body>
 </html>
