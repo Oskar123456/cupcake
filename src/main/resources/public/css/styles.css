@@ -9,6 +9,7 @@ html {
     max-width: 1000px;
     gap: 20px;
     flex-wrap: nowrap;
+    white-space: nowrap;
     flex-shrink: 1;
 }
 
