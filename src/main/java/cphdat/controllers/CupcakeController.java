@@ -291,7 +291,6 @@ public class CupcakeController {
         try {
             user = CupcakeMapper.GetUserByEmailPwd(cp, ctx.formParam("email"), ctx.formParam("pwd"));
             if (user != null)
-                System.err.println("logged in as " + user.Email());
         } catch (DatabaseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

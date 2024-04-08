@@ -305,7 +305,6 @@ public class CupcakeMapper {
             ps.setInt(4, order.Bot());
             ps.setInt(5, order.Top());
             ps.setInt(6, order.Quant());
-            System.err.println(ps);
             int success = ps.executeUpdate();
             if (success == 1)
                 retval = true;
