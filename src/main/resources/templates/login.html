@@ -19,7 +19,24 @@
         </a>
     </header>
 
-    <div class="inputDiv">
+    <div class="navbar">
+        <div class="navbarLeft">
+            <a th:if="${session.admin == true}" th:href="customers">Kunder</a>
+            <a th:if="${session.admin == true}" th:href="allorders">Ordrer</a>
+        </div>
+        <div class="navbarRight">
+            <a th:if="${session.user == null}" href="../templates/login.html"
+               th:href="login">log ind</a>
+            <a th:if="${session.user != null}" href="../templates/profile.html"
+               th:href="@{profile(email=${session.user.Email()})}"
+               th:text="${session.user.Email()}"></a>
+            <a href="../templates/myorders.html" th:href="myorders">
+                <img src="../public/images/shoppingbasket2mini.png" th:src="@{/images/shoppingbasket2mini.png}" alt=""/>
+            </a>
+        </div>
+    </div>
+
+    <div class="contentBox">
         <form method="post">
           <input type="email" id="email" name="email" value="" placeholder="indtast din email" />
           <input type="password" id="pwd" name="pwd" value="" placeholder="indtast dit kodeord" />
@@ -29,7 +46,7 @@
           </form>
     </div>
 
-    <div>
+    <div class="contentBox">
         <a href="../templates/create.html" th:href="create">
           Opret bruger
         </a>

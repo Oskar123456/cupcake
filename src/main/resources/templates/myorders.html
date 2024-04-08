@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>Profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" th:href="@{/images/cupcakefavico32x32.png}">
+<link rel="icon" type="image/png" sizes="48x48" th:href="@{/images/cupcakefavico48x48.png}">
+</head>
+
+<body>
+
+<div class="page">
+    <header>
+        <a href="index.html" th:href="@{/}">
+            <img src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogotitle.png}" alt="" />
+            <img alt="logo" src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogocakes.png}"/>
+        </a>
+    </header>
+
+    <div class="navbar">
+        <div class="navbarLeft">
+            <a th:if="${session.admin == true}" th:href="customers">Kunder</a>
+            <a th:if="${session.admin == true}" th:href="allorders">Ordrer</a>
+        </div>
+        <div class="navbarRight">
+            <a th:if="${session.user == null}" href="../templates/login.html"
+               th:href="login">log ind</a>
+            <a th:if="${session.user != null}" href="../templates/profile.html"
+               th:href="@{profile(email=${session.user.Email()})}"
+               th:text="${session.user.Email()}"></a>
+            <a href="../templates/myorders.html" th:href="myorders">
+                <img src="../public/images/shoppingbasket2mini.png" th:src="@{/images/shoppingbasket2mini.png}" alt=""/>
+            </a>
+        </div>
+    </div>
+
+
+    <div>
+  <h1>Kurv</h1>
+</div>
+
+<div class="contentBox">
+
+    <table>
+            <thead>
+            <tr>
+                <th>Bestilling</th>
+                <th>Pris</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order,iterStat : ${session.pendingorders}">
+                <th th:text="${order.Quant()} + ' stk. m. ' + ${order.Top()} + ' top og ' + ${order.Bot()}  + ' bund'"></th>
+                <td th:text="${pendingordersprices.get(__${iterStat.index}__)}"></td>
+                <td>
+                <form method="post">
+                  <input type="hidden" name="myordersdeleteid" th:value="${iterStat.index}"/>
+                  <button class="badbutton" type="submit" formaction="myordersdelete">slet</button>
+                </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    <p class="myorderstotal" th:text="'i alt: dkk ' + ${pendingorderstotal}"></p>
+    <form class="myordersform" method="post">
+    <button class="buttonconfirm" formaction="/myordersconfirm" type="submit">Bestil</button>
+    </form>
+</div>
+<div class="contentBox"></div>
+
+
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
 <title>Frontpage</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
 <div class="page">
     <header>
         <a href="index.html" th:href="@{/}">
-            <img src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogotitle.png}" alt="" />
+            <img src="../public/images/cupcakelogotitle.png" th:src="@{/images/cupcakelogotitle.png}" alt="" />
             <img alt="logo" src="../public/images/cupcakelogocakes.png" th:src="@{/images/cupcakelogocakes.png}"/>
         </a>
     </header>
@@ -30,28 +30,27 @@
             <a th:if="${session.user != null}" href="../templates/profile.html"
                th:href="@{profile(email=${session.user.Email()})}"
                th:text="${session.user.Email()}"></a>
-            <a href="../templates/myorders.html" th:href="myorders">kurv</a>
+            <a href="../templates/myorders.html" th:href="myorders">
+                <img src="../public/images/shoppingbasket2mini.png" th:src="@{/images/shoppingbasket2mini.png}" alt=""/>
+            </a>
         </div>
     </div>
 
-    <div class="inputDiv">
+    <div class="contentBox">
         <h1>Velkommen</h1>
         <h2>Info her</h2>
         <form method="post">
             <div class="frontpageBoxOrderSelections">
-                <select name="bund">
-                    <option value="testbund1">testbund1</option>
-                    <option value="testbund2">testbund2</option>
+                <select name="top">
+                    <option th:each="top : ${tops}" th:value="${top.Id()}" th:text="${top.Name()} + ' : dkk ' + ${top.Price()}"></option>
                     </select>
 
-      <select name="topping">
-                    <option value="testtopping1">testtopping1</option>
-                    <option value="testtopping2">testtopping2</option>
+      <select name="bot">
+                    <option th:each="bot : ${bots}" th:value="${bot.Id()}" th:text="${bot.Name()} + ' : dkk ' + ${bot.Price()}"></option>
                     </select>
 
-      <select name="antal">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+      <select name="quant">
+                    <option th:each="num : ${range}" th:value="${num}" th:text="${num} + ' stk.'"></option>
                     </select>
 
             </div>
@@ -59,7 +58,7 @@
         </form>
     </div>
 
-    <div class="frontpagestatus" th:if="${message != null && !message.isEmpty()}" >
+    <div class="statusmessage" th:if="${message != null && !message.isEmpty()}" >
         <p th:text="${message}" ></p>
     </div>
 

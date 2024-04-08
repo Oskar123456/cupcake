@@ -19,8 +19,104 @@
         </a>
     </header>
 
+    <div class="navbar">
+        <div class="navbarLeft">
+            <a th:if="${session.admin == true}" th:href="customers">Kunder</a>
+            <a th:if="${session.admin == true}" th:href="allorders">Ordrer</a>
+        </div>
+        <div class="navbarRight">
+            <a th:if="${session.user == null}" href="../templates/login.html"
+               th:href="login">log ind</a>
+            <a th:if="${session.user != null}" href="../templates/profile.html"
+               th:href="@{profile(email=${session.user.Email()})}"
+               th:text="${session.user.Email()}"></a>
+            <a href="../templates/myorders.html" th:href="myorders">kurv</a>
+        </div>
+    </div>
+
+
+
 <div>
-  <h1 th:text="${requser.Email()}"></h1>
+  <h1 th:text="${requser.Email()} + '\'s profil'"></h1>
+</div>
+
+<div class="contentBox">
+    <h2>Saldo</h2>
+    <p th:text="'dkk ' + ${requser.Credit()}"></p>
+    <form th:if="${session.admin == true}" method="post">
+        <input type="hidden" name="profileaddcreditid" th:value="${requser.Id()}"/>
+        <input type="number" step="any" name="profileaddcredit"/>
+        <button class="buttonconfirm" type="submit" formaction="profileaddcredit">sæt ind</button>
+    </form>
+    <form method="post">
+        <button class="badbutton" type="submit" formaction="logout">log ud</button>
+    </form>
+</div>
+<div class="contentBox">
+  <h2>Aktuelle ordrer</h2>
+    <table>
+            <thead>
+            <tr>
+                <th>Cupcakes</th>
+                <th>Bestilt</th>
+                <th>Ønsket</th>
+                <th>Pris</th>
+                <th th:if="${session.admin == true}" ></th>
+                <th th:if="${session.admin == true}" ></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order,iterStat : ${activeorders}">
+                <th th:text="${order.Quant()} + ' stk. m. ' + ${activeorderstopnames.get(__${iterStat.index}__)} + ' top og '
+                + ${activeordersbotnames.get(__${iterStat.index}__)}  + ' bund'"></th>
+                <td th:text="${order.CreateDate()}"></td>
+                <td th:text="${order.DesiredDate()}"></td>
+                <td th:text="${activeordersprices.get(__${iterStat.index}__)}"></td>
+                <th th:if="${session.admin == true}" >
+                    <form method="post">
+                        <input type="hidden" name="deleteactiveorder" th:value="${order.Id()}" />
+                        <button class="badbutton" type="submit" formaction="profiledeleteactiveorder">slet</button>
+                    </form>
+                </th>
+                <th th:if="${session.admin == true}" >
+                    <form method="post">
+                        <input type="hidden" name="acceptactiveorder" th:value="${order.Id()}" />
+                        <button class="buttonconfirm" type="submit" formaction="profileacceptactiveorder">godkend</button>
+                    </form>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+
+    <p class="myorderstotal" th:text="'i alt: dkk ' + ${activeorderstotal}"></p>
+    <p class="statusmessage" th:if="${session.admin == true}" th:text="${message}"></p>
+
+</div>
+<div class="contentBox">
+  <h2>Forrige ordrer</h2>
+    <table>
+            <thead>
+            <tr>
+                <th>Cupcakes</th>
+                <th>Bestilt</th>
+                <th>Hentet</th>
+                <th>Pris</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order,iterStat : ${prevorders}">
+                <th th:text="${order.Quant()} + ' stk. m. ' + ${prevordersbotnames.get(__${iterStat.index}__)} + ' top og '
+                + ${prevordersbotnames.get(__${iterStat.index}__)}  + ' bund'"></th>
+                <td th:text="${order.CreateDate()}"></td>
+                <td th:text="${order.FinishDate()}"></td>
+                <td th:text="${prevordersprices.get(__${iterStat.index}__)}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    <p class="myorderstotal" th:text="'i alt: dkk ' + ${prevorderstotal}"></p>
+    <p class="statusmessage" th:if="${session.admin == true}" th:text="${message}"></p>
+
 </div>
 
 
